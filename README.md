@@ -1,44 +1,91 @@
-# Practice Challenge: Toy Tales
 
-You've got a friend in need! Again!
+# Toy Tales
 
-Andy has misplaced of his toys (again) and need your help to organize them.
+A React CRUD application for managing Andy's collection of toys.
+
+Users can view all toys, add new toys, like toys, and donate toys. The React
+frontend communicates with a JSON Server backend using RESTful API requests.
+
+## Features
+
+- Display all toys when the application loads
+- Add a new toy to the collection
+- Like a toy to increase its like count
+- Donate a toy to remove it from the collection
+- Dynamically update the page after each CRUD operation
+
+## CRUD Operations
+
+### GET - Display Toys
+
+When the application loads, it makes a GET request to `/toys` and displays
+each toy using the `ToyCard` component.
+
+### POST - Add a Toy
+
+When the add-toy form is submitted, the application makes a POST request to
+`/toys` to create a new toy. New toys start with 0 likes.
+
+### DELETE - Donate a Toy
+
+When the "Donate to GoodWill" button is clicked, the application makes a
+DELETE request to `/toys/:id` and removes the toy from the page.
+
+### PATCH - Like a Toy
+
+When the "Like <3" button is clicked, the application makes a PATCH request
+to `/toys/:id` to increase the toy's like count. The updated likes are also
+reflected on the page.
+
+## Technologies
+
+- React
+- JavaScript
+- Vite
+- JSON Server
+- Vitest
+- React Testing Library
 
 ## Setup
 
-All the information about Andy's toys can be found in the `db.json` file. We'll
-be using `json-server` to create a RESTful API for our database.
+All toy data is stored in `db.json`. JSON Server provides the RESTful API
+used by the React application.
 
-Run `npm install` to install our dependencies.
+### Install dependencies
 
-Then, run `npm run server` to start up `json-server` on `http://localhost:3001`.
+```bash
+npm install
+```
 
-In another tab, run `npm run dev` to start up our React app at `http://localhost:3000`.
+## Testing
 
-In another tab, run `npm run test` to run the test suite.
+The application includes tests for:
+- Displaying all toys
+- Adding a toy
+- Donating a toy
+- Liking a toy
 
-Before you start building out the application, the first step that you should
-take is to examint the current code and component hierarchy. This will tell you 
-how components can pass data to each other as well as where that information should 
-be stored.
+The completed test suite contains 5 tests across 4 test files.
 
-## Deliverables
+## Screenshots
 
-- _When our application loads_, make a GET request to `/toys` to fetch the toy
-  array. Given your component tree, think about which component should be
-  responsible for the array. After you have put the data in the proper
-  component, your next job is to render the `ToyCard` components on the page.
+![Toy Tales application](./screenshots/toy-tales.png)
 
-- _When the `ToyForm` is submitted_, make a POST request to `/toys` to save a
-  new toy to the server. Using the ideas of controlled form and inverse data
-  flow, think about how to render a new `ToyCard` for the toy that you created.
+## Project Structure
+src/
+├── components/
+│   ├── App.jsx
+│   ├── Header.jsx
+│   ├── ToyCard.jsx
+│   ├── ToyContainer.jsx
+│   └── ToyForm.jsx
+└── __tests__/
+    ├── AllToys.test.jsx
+    ├── Donate.test.jsx
+    ├── Like.test.jsx
+    └── ToyForm.test.jsx
 
-- _When the `Donate to Goodwill` button is clicked_, make a DELETE request to
-  `/toys/:id` with the ID of the toy that was clicked to delete the toy from the
-  server. The `ToyCard` that you clicked on should also be removed from the DOM.
+db.json
+README.md
+package.json
 
-- _When the like button is clicked_, make a PATCH request to `/toys/:id` with
-  the id of the toy that was clicked, along with the new number of likes (this
-  should be sent in the body of the PATCH request, as a object:
-  `{ likes: 10 }`), to update the toy on the server. Clicking on the button
-  should also increase the number of likes on the DOM.

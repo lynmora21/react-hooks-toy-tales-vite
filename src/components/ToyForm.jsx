@@ -13,6 +13,7 @@ function ToyForm({ setToys }) {
       likes: 0,
     };
 
+    // Send the new toy to the backend and add the returned toy to state
     fetch("http://localhost:3001/toys", {
       method: "POST",
       headers: {

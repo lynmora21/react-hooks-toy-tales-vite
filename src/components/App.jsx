@@ -12,6 +12,7 @@ function App() {
     setShowForm((showForm) => !showForm);
   }
 
+  // Fetch all toys from the backend when the app first loads
   useEffect(() => {
     fetch("http://localhost:3001/toys")
       .then((r) => r.json())

@@ -2,6 +2,7 @@ import React from "react";
 
 function ToyCard({ toy, setToys }) {
   function handleDelete() {
+    // Delete this toy from the backend and remove it from the page
     fetch(`http://localhost:3001/toys/${toy.id}`, {
       method: "DELETE",
     })
@@ -14,24 +15,25 @@ function ToyCard({ toy, setToys }) {
   }
 
   function handleLike() {
-  fetch(`http://localhost:3001/toys/${toy.id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      likes: toy.likes + 1,
-    }),
-  })
-    .then((response) => response.json())
-    .then((updatedToy) => {
-      setToys((currentToys) =>
-        currentToys.map((currentToy) =>
-          currentToy.id === updatedToy.id ? updatedToy : currentToy,
-        ),
-      );
-    });
-}
+    // Increase this toy's likes on the backend and update the local state
+    fetch(`http://localhost:3001/toys/${toy.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        likes: toy.likes + 1,
+      }),
+    })
+      .then((response) => response.json())
+      .then((updatedToy) => {
+        setToys((currentToys) =>
+          currentToys.map((currentToy) =>
+            currentToy.id === updatedToy.id ? updatedToy : currentToy,
+          ),
+        );
+      });
+  }
 
   return (
     <div className="card" data-testid="toy-card">
